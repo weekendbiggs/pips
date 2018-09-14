@@ -1,32 +1,60 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Reactor Game</title>
-  <link rel="stylesheet" type="text/css" href="stylesheets/style.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i|Orbitron:400,900" rel="stylesheet">
-  <script type="text/javascript" src="scripts/animations.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.6/lib/draggable.bundle.js"></script>
-</head>
-
-<body id="app">
-  <div id="game-container">
-    <div id="game-title">
-      <h1>REACTOR</h1>
-      <p>A simple browser game.</p>
-    </div>
-    <div id="game-reactor">
-      <div id="reactor-outer">
-        <div id="reactor-core">
-
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reactor Game</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i|Orbitron:400,900" rel="stylesheet">
+    <script type="text/javascript" src="scripts/animations.js"></script>
+    <script type="text/javascript" src="scripts/logic.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.6/lib/draggable.bundle.js"></script>
+  </head>
+  <body id="app">
+    <div id="game-container">
+      <div id="game-title">
+        <h1>REACTOR</h1>
+        <p>A simple browser game.</p>
+      </div>
+      <div id="game-reactor">
+        <div id="reactor-outer">
+          <div id="reactor-core">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+              <defs>
+              <style>
+              .cls-1{fill:url(#radial-gradient)}.cls-2{fill:url(#radial-gradient-2)}
+              </style>
+              <radialGradient id="radial-gradient" cx="119.67" cy="120" r="127.02" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#fff"/>
+              <stop offset="1"/>
+              </radialGradient>
+              <radialGradient id="radial-gradient-2" cx="119.33" cy="120" r="132.66" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#595959"/>
+              <stop offset="1"/>
+              </radialGradient>
+              </defs>
+              <g id="Layer_2" data-name="Layer 2">
+                <g id="Layer_1-2" data-name="Layer 1">
+                  <path class="cls-1" d="M85.73 191.17l-17.81 37A119.52 119.52 0 0 0 120 240v-41a78.45 78.45 0 0 1-34.27-7.83z"/>
+                  <path class="cls-2" d="M181.72 169.22l32.1 25.6A119.46 119.46 0 0 0 237 146.71l-40-9.13a78.71 78.71 0 0 1-15.28 31.64z"/>
+                  <path class="cls-1" d="M181.72 70.78l32.1-25.6a120.66 120.66 0 0 0-41.74-33.32l-17.81 37a79.36 79.36 0 0 1 27.45 21.92zM199 120a78.43 78.43 0 0 1-2 17.58l40 9.13a120.8 120.8 0 0 0 0-53.42l-40 9.13a78.43 78.43 0 0 1 2 17.58z"/>
+                  <path class="cls-2" d="M197 102.42l40-9.13a119.46 119.46 0 0 0-23.19-48.11l-32.1 25.6A78.71 78.71 0 0 1 197 102.42zM154.27 48.83l17.81-37A119.52 119.52 0 0 0 120 0v41a78.45 78.45 0 0 1 34.27 7.83z"/>
+                  <path class="cls-1" d="M85.73 48.83A78.45 78.45 0 0 1 120 41V0a119.52 119.52 0 0 0-52.08 11.86zM154.27 191.17l17.81 37a120.66 120.66 0 0 0 41.74-33.32l-32.1-25.6a79.36 79.36 0 0 1-27.45 21.92zM43 137.58l-40 9.13a119.46 119.46 0 0 0 23.19 48.11l32.1-25.6A78.71 78.71 0 0 1 43 137.58z"/>
+                  <path class="cls-2" d="M85.73 48.83l-17.81-37a120.66 120.66 0 0 0-41.74 33.35l32.1 25.6a79.36 79.36 0 0 1 27.45-21.95z"/>
+                  <path class="cls-1" d="M58.28 70.78l-32.1-25.6A119.46 119.46 0 0 0 3 93.29l40 9.13a78.71 78.71 0 0 1 15.28-31.64z"/>
+                  <path class="cls-2" d="M41 120a78.43 78.43 0 0 1 2-17.58L3 93.29a120.8 120.8 0 0 0 0 53.42l40-9.13A78.43 78.43 0 0 1 41 120zM120 199v41a119.52 119.52 0 0 0 52.08-11.86l-17.81-37A78.45 78.45 0 0 1 120 199zM58.28 169.22l-32.1 25.6a120.66 120.66 0 0 0 41.74 33.32l17.81-37a79.36 79.36 0 0 1-27.45-21.92z"/>
+                </g>
+              </g>
+            </svg>
+          </div>
         </div>
       </div>
+      <div id="game-ui">
+        <meter id="reactor-fuel-level" value="0" min="0" max="100"></meter>
+        <button id="refuel">Refuel</button>
+      </div>
     </div>
-  </div>
-</body>
-
+  </body>
 </html>
