@@ -1,23 +1,27 @@
-$(function() {
-    var fuel = 0;
+var fuel = 0;
+var fuelLimit = 10;
+var power = 0;
+var powerGen = 1;
+var fuelBurn = 1;
 
-    $("#refuel").click(function() {
-        if (fuel < 100) {
-            fuel = fuel + 10;
-            $("#reactor-fuel-level").val(fuel)
-        } else {
-            console.log("Max Fuel")
-        }
-    });
-
-    function decreaseFuel() {
-        if (fuel > 0) {
-            fuel = fuel - 5;
-            $("#reactor-fuel-level").val(fuel)
-            $("#reactor-core").addClass('reactor-active')
-        } else {
-            $("#reactor-core").removeClass('reactor-active')
-        }
+function fuelClick(number) {
+    if (fuel < fuelLimit) {
+        fuel = fuel + number;
     }
-    setInterval(decreaseFuel, 1000);
-});
+    document.getElementById("fuel").innerHTML = fuel;
+}
+
+function generate() {
+    if (fuel > 0) {
+        fuel = fuel - fuelBurn;
+        power = power + powerGen;
+    }
+    document.getElementById("power").innerHTML = power;
+    document.getElementById("fuel").innerHTML = fuel;
+};
+
+window.setInterval(function(){
+    
+    generate();
+    
+}, 1000);
