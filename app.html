@@ -9,8 +9,22 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i|Orbitron:400,900" rel="stylesheet">
   </head>
   <body id="app">
-    <h1>REACTOR</h1>
-    <p>Power: <span id="power">0</span></p>
+    <p><strong>Stats</strong></p>
+    <p>Power: <span id="power"></span></p>
+    <p>Money: <span id="money"></span></p>
+    <p><strong>Reactor</strong></p>
+    <div id="reactor"><meter id="fuel-meter" value="0" min="0" max="10"></meter></div>
+    <p>Level: <span id="reactor-level"></span></p>
+    <p>Fuel: <span id="reactor-fuel"></span></p>
+    <p>Max Fuel: <span id="reactor-max-fuel"></span></p>
+    <p>Burn Rate: <span id="reactor-burnrate"></span> fuel/sec</p>
+    <p>Gen Rate: <span id="reactor-genrate"></span> power/sec</p>
+    <p>Tick Speed: <span id="reactor-tickspeed"></span>ms</p>
+    <p>isEmpty: <span id="reactor-isempty"></span></p>
+    <button data-fuel="wood">Add Wood</button>
+    <button data-fuel="coal">Add Coal</button>
+
+    <!-- <p>Power: <span id="power">0</span></p>
     <p>Fuel: <span id="fuel">0</span></p>
     <button onclick="fuelClick(clickValue)">Add Fuel</button>
     <div id="fuel-slot" class="drag-container"></div>
@@ -24,7 +38,7 @@
       <p>Fuel Capacity: <span id="fuel-limit">10</span></p>
       <p>Fuel Efficiency: <span id="fuel-burn">1</span></p>
       <p>Reactor Output: <span id="power-gen">1</span></p>
-    </div>
+    </div> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js"></script>
     <script type="text/javascript" src="scripts/logic.js"></script>
