@@ -1,1 +1,2 @@
-# reactor-game
+# Pips
+A game.
