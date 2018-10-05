@@ -37,12 +37,13 @@ let tickSpeed = 1000;
 const pips = [];
 
 class Pip {
-    constructor(id, level, fuel, burnRate, genRate, isEmpty) {
+    constructor(id, level, fuel, burnRate, genRate, isEmpty, pipPellets) {
         this.id = id;
         this.level = 1;
         this.fuel = 0;
         this.burnRate = 1;
         this.genRate = 1;
+        this.pipPellets = 0;
     }
     helloPip() {
         console.log('Hi, I\'m a Pip! I am Pip #' + this.id + '.', 'There are', pips.length, 'other Pips besides me.');
@@ -64,8 +65,9 @@ function pipUi() {
     pipDiv.setAttribute('data-pip', pips.length);
 
     // Create pip name element
-    let pipName = document.createElement("span");
-    pipName.innerHTML = ('Pip ' + pips.length)
+    let pipImg = document.createElement("img");
+    pipImg.setAttribute('src', 'graphics/cube-0.png');
+    pipImg.setAttribute('data-pip-img', pips.length);
 
     // Create fuel meter
     let pipMeter = document.createElement("meter");
@@ -73,16 +75,24 @@ function pipUi() {
     pipMeter.setAttribute('value', '0');
     pipMeter.setAttribute('min', '0');
 
-    // Create add fuel button
+    // Create feed pip button
     let pipAddFuelButton = document.createElement("button");
-    pipAddFuelButton.className = 'fuel-btn';
-    pipAddFuelButton.setAttribute('data-pip-button', pips.length);
-    pipAddFuelButton.innerHTML = ('Add Fuel')
+    pipAddFuelButton.className = 'feed-btn';
+    pipAddFuelButton.setAttribute('data-feed-pip', pips.length);
+    pipAddFuelButton.innerHTML = ('Feed Pip');
+
+    // Create take pellets button
+    let pipTakePelletsButton = document.createElement("button");
+    pipTakePelletsButton.className = 'pellets-btn';
+    pipTakePelletsButton.setAttribute('data-take-pellets', pips.length);
+    pipTakePelletsButton.innerHTML = ('Take Pellets');
+    pipTakePelletsButton.classList.add('hide');
 
     //Append all of the created elements to the parent div
-    pipDiv.appendChild(pipName);
-    pipDiv.appendChild(pipMeter);
     pipDiv.appendChild(pipAddFuelButton);
+    pipDiv.appendChild(pipTakePelletsButton);
+    pipDiv.appendChild(pipImg);
+    pipDiv.appendChild(pipMeter);
 
     document.getElementById("pips").appendChild(pipDiv);
 };
@@ -95,13 +105,30 @@ document.addEventListener('click', function(event) {
 });
 
 document.addEventListener('click', function(event) {
-    if (event.target.matches('.fuel-btn')) {
-        let dataPipNumber = event.target.getAttribute('data-pip-button');
+    if (event.target.matches('.feed-btn')) {
+        let dataPipNumber = event.target.getAttribute('data-feed-pip');
         let dataPip = pips.find(obj => obj.id == dataPipNumber);
         if (dataPip.fuel == 0) {
             dataPip.fuel = currentFuelType.fuelCount;
+            event.target.classList.add('hide');
+            let pipImg = document.querySelector("[data-pip-img=" + CSS.escape(dataPipNumber) + "]");
+            pipImg.setAttribute('src', 'graphics/cube-0-wood.png');
             updatePipMeter(dataPip, dataPipNumber);
         }
+    }
+
+});
+
+document.addEventListener('click', function(event) {
+    if (event.target.matches('.pellets-btn')) {
+        let dataPipNumber = event.target.getAttribute('data-take-pellets');
+        let dataPip = pips.find(obj => obj.id == dataPipNumber);
+        pellets = pellets + dataPip.pipPellets;
+        dataPip.pipPellets = 0;
+        event.target.classList.add('hide');
+        let pipAddFuelButton = document.querySelector("[data-feed-pip=" + CSS.escape(dataPipNumber) + "]");
+        pipAddFuelButton.classList.remove('hide');
+        updateStats();
     }
 
 });
@@ -115,6 +142,8 @@ function updatePipMeter(dataPip, dataPipNumber) {
 function updateStats() {
     let pelletCounter = document.querySelector("#pellets");
     let moneyCounter = document.querySelector("#money");
+    let currentFuel = document.querySelector("#fuel");
+    currentFuel.innerHTML = currentFuelType.name;
     pelletCounter.innerHTML = pellets;
     moneyCounter.innerHTML = money;
 }
@@ -124,9 +153,15 @@ function generate() {
     pips.forEach(function(pipItem) {
         if (pipItem.fuel > 0) {
             pipItem.fuel = pipItem.fuel - pipItem.burnRate;
-            pellets = pellets + pipItem.genRate;
+            pipItem.pipPellets = pipItem.pipPellets + pipItem.genRate;
             updatePipMeter(pipItem, pipItem.id);
-            updateStats();
+        } else if (pipItem.pipPellets == currentFuelType.fuelCount) {
+            let dataPipNumber = pipItem.id;
+            let pipTakePelletsButton = document.querySelector("[data-take-pellets=" + CSS.escape(dataPipNumber) + "]");
+            let pipAddFuelButton = document.querySelector("[data-feed-pip=" + CSS.escape(dataPipNumber) + "]");
+            pipTakePelletsButton.classList.remove('hide');
+            let pipImg = document.querySelector("[data-pip-img=" + CSS.escape(dataPipNumber) + "]");
+            pipImg.setAttribute('src', 'graphics/cube-0.png');
         }
     });
 };
@@ -134,4 +169,9 @@ function generate() {
 window.setInterval(function() {
     generate();
 }, tickSpeed);
+
+    updateStats();
+
+
+
 
