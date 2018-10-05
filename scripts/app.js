@@ -70,7 +70,7 @@ function pipUi() {
     pipImg.setAttribute('data-pip-img', pips.length);
 
     // Create fuel meter
-    let pipMeter = document.createElement("meter");
+    let pipMeter = document.createElement("progress");
     pipMeter.setAttribute('data-pip-meter', pips.length);
     pipMeter.setAttribute('value', '0');
     pipMeter.setAttribute('min', '0');
@@ -98,13 +98,6 @@ function pipUi() {
 };
 
 document.addEventListener('click', function(event) {
-    if (event.target.matches('#add-pip')) {
-        pipBuilder();
-        pipUi();
-    }
-});
-
-document.addEventListener('click', function(event) {
     if (event.target.matches('.feed-btn')) {
         let dataPipNumber = event.target.getAttribute('data-feed-pip');
         let dataPip = pips.find(obj => obj.id == dataPipNumber);
@@ -115,12 +108,7 @@ document.addEventListener('click', function(event) {
             pipImg.setAttribute('src', 'graphics/cube-0-wood.png');
             updatePipMeter(dataPip, dataPipNumber);
         }
-    }
-
-});
-
-document.addEventListener('click', function(event) {
-    if (event.target.matches('.pellets-btn')) {
+    } if (event.target.matches('.pellets-btn')) {
         let dataPipNumber = event.target.getAttribute('data-take-pellets');
         let dataPip = pips.find(obj => obj.id == dataPipNumber);
         pellets = pellets + dataPip.pipPellets;
@@ -129,6 +117,9 @@ document.addEventListener('click', function(event) {
         let pipAddFuelButton = document.querySelector("[data-feed-pip=" + CSS.escape(dataPipNumber) + "]");
         pipAddFuelButton.classList.remove('hide');
         updateStats();
+    } if (event.target.matches('#add-pip')) {
+        pipBuilder();
+        pipUi();
     }
 
 });
@@ -170,7 +161,7 @@ window.setInterval(function() {
     generate();
 }, tickSpeed);
 
-    updateStats();
+updateStats();
 
 
 

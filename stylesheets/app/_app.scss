@@ -1,27 +1,30 @@
 #app {
-  .hide {
-    display: none;
-  }
+ .hide {
+  display: none;
+ }
+
  #pips {
   display: flex;
   flex-wrap: wrap;
+
   .pip {
    display: flex;
    flex-direction: column;
    align-items: center;
    justify-content: flex-end;
    padding: 10px;
-       width: 100px;
-    height: 72px;
-    background: #f7f7f7;
-    border: 1px solid #e3e3e3;
-    margin: 5px;
+   width: 100px;
+   height: 80px;
+   background: #f7f7f7;
+   border: 1px solid #e3e3e3;
+   margin: 5px;
+
    button {
     margin-bottom: 5px;
    }
-   meter {
-    margin-top: 5px;
-        width: 48px;
+
+   progress {
+    width: 48px;
     height: 10px;
    }
   }

@@ -1,2 +1,2 @@
-#app .hide{display:none}#app #pips{display:flex;flex-wrap:wrap}#app #pips .pip{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:10px;width:100px;height:72px;background:#f7f7f7;border:1px solid #e3e3e3;margin:5px}#app #pips .pip button{margin-bottom:5px}#app #pips .pip meter{margin-top:5px;width:48px;height:10px}
+#app .hide{display:none}#app #pips{display:flex;flex-wrap:wrap}#app #pips .pip{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:10px;width:100px;height:80px;background:#f7f7f7;border:1px solid #e3e3e3;margin:5px}#app #pips .pip button{margin-bottom:5px}#app #pips .pip progress{width:48px;height:10px}
 /*# sourceMappingURL=style.css.map */
