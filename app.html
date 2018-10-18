@@ -7,13 +7,21 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
   </head>
   <body id="app">
-    <p><strong>Stats</strong></p>
-    <p>Pellets: <span id="pellets"></span></p>
-    <p>Money: <span id="money"></span></p>
-    <p>Current Fuel: <span id="fuel"></span></p>
-    <p><strong>Pips</strong></p>
-    <button id="add-pip">Add Pip</button>
-    <div id="pips">
+    <div id="game">
+      <dialog id="upgradeDialog">
+        <button id="closeDialog">X Close</button>
+        <p>This is the upgrade dialog!</p>
+        <p>Current Fuel: <span id="fuel"></span> <button id="fuel-upgrade">$500 - Upgrade Fuel</button></p>
+        <p>Tick Speed: <span id="tick-speed"></span>ms <button id="speed-upgrade">$100 - Upgrade Speed</button></p>
+        <p>Pellet Value: <span id="money-pellet">$1</span> <button id="value-upgrade">$100 - Increase Pellet Value</button></p>
+      </dialog>
+      <p><img src="graphics/pellet.png"><span id="pellets"></span> <button id="sell-pellets">Sell 1 Pellet(s)</button></p>
+      <p>Money: $<span id="money"></span></p>
+      <button id="upgrade-menu">Upgrade Menu</button>
+      <p><strong>Pips</strong></p>
+      <button id="addPip">$0 - Add Pip</button>
+      <div id="pips">
+      </div>
     </div>
     <script type="text/javascript" src="scripts/app.js"></script>
   </body>
